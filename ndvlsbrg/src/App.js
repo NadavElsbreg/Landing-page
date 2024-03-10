@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './css/App.css';
 import "./headers"
 import headerMainPage from './headers';
+import mainBody from './body';
 
 let state = 1;
 
@@ -28,8 +29,11 @@ function App() {
   }
   else{
     return(
-      headerMainPage()
-    )
+      <div>
+        {headerMainPage()}
+        {mainBody()}
+      </div>
+    );
   }
 }
 
