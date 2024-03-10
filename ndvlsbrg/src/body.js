@@ -1,5 +1,8 @@
 import './css/body.css'
 import React, { useState, useEffect } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
 
 function useIPAddress() {
     const [ipAddress, setIPAddress] = useState('');
@@ -44,6 +47,28 @@ function useDataJson(ipAddress) {
     return dataJson;
 }
 
+const MapComponent = ({ latitude, longitude }) => {
+    useEffect(() => {
+        const map = L.map('map').setView([latitude, longitude], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([latitude, longitude]).addTo(map)
+            .bindPopup('Your Location')
+            .openPopup();
+
+        return () => {
+            map.remove();
+        };
+    }, [latitude, longitude]);
+
+    return (
+        <div id="map" style={{ height: '400px', width: '100%' }} />
+    );
+};
+
 
 function MainBody() {
     const ipAddress = useIPAddress();
@@ -75,6 +100,9 @@ function MainBody() {
                         <span class="info-label">Longitude: </span>
                         <span class="info-value">{ipData.lon}</span>
                     </div>            
+                </div>
+                <div className='container'>
+                    <MapComponent latitude={ipData.lat} longitude={ipData.lon}/>
                 </div> 
             </div>
         )
