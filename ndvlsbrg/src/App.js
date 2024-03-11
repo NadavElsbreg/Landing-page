@@ -3,6 +3,7 @@ import './css/App.css';
 import "./headers"
 import headerMainPage from './headers';
 import mainBody from './body';
+import generateFooter from './footers'
 
 let state = 1;
 
@@ -32,6 +33,7 @@ function App() {
       <div>
         {headerMainPage()}
         {mainBody()}
+        {generateFooter()}
       </div>
     );
   }
