@@ -9,7 +9,7 @@ function headerMainPage(){
                 <div class="buttons">
                     <button onclick="window.location.href='login.html'">Log in</button>
                     <button onclick="window.location.href='signup.html'">Sign Up</button>
-                    <button onclick={toggleMenu()}>options</button>
+                    {/* <button onclick={toggleMenu()}>options</button> */}
                 </div>
         </header>)
 }

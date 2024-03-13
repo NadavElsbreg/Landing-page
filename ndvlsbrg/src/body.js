@@ -73,7 +73,7 @@ const MapComponent = ({ latitude, longitude }) => {
 function MainBody() {
     const ipAddress = useIPAddress();
     let ipData = useDataJson(ipAddress);
-    console.log(ipData)
+    // console.log(ipData);
     if(ipData.status=="success"){
         return(
             <div class="container">
@@ -101,7 +101,7 @@ function MainBody() {
                         <span class="info-value">{ipData.lon}</span>
                     </div>            
                 </div>
-                <div className='container'>
+                <div className='container' id='mapContainer'>
                     <MapComponent latitude={ipData.lat} longitude={ipData.lon}/>
                 </div> 
             </div>
