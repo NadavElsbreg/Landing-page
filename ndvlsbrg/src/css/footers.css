@@ -46,3 +46,23 @@ footer {
     margin-left: 40%;
     margin-right: 40%;
 }
+
+/* WhatsApp link */
+.footer-links .whatsapp-link {
+    display: flex;
+    align-items: center;
+}
+
+.footer-links .whatsapp-link span {
+    margin-left: 5px;
+}
+
+/* Mail link */
+.footer-links .mail-link {
+    display: flex;
+    align-items: center;
+}
+
+.footer-links .mail-link span {
+    margin-left: 5px;
+}

@@ -1,7 +1,6 @@
 import "./css/footers.css";
 import React, {useState, useEffect, useRef} from "react";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faWhatsapp, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { Envelope, Whatsapp } from 'react-bootstrap-icons';
 
 const mailtoMail="Nadav.Elsberg@protonmail.com"
 
@@ -20,25 +19,27 @@ function About(){
         </footer>
     )  
 }
-// function ContactUs(){
-//     return(
-//         <div>
-//             <a href={ContactUsPhone}target="_blank" rel="noopener noreferrer">
-//                 <FontAwesomeIcon icon={faWhatsapp} />
-//                 <span> via WhatsApp</span>
-//             </a>
+function ContactUs(){
+    return(
+        <div class="footer-links">
+            <a href={ContactUsPhone} class="whatsapp-link" target="_blank" rel="noopener noreferrer">
+                <Whatsapp size={24} color="green" />
+                <span> via WhatsApp</span>
+            </a>
 
-//             <a href={ContactUsLink} target="_blank" rel="noopener noreferrer">
-//                 <FontAwesomeIcon icon={faEnvelope} />
-//                 <span> via Mail</span>
-//             </a>
-//         </div>
-//     )
-// }
+            <a href={ContactUsLink} class="mail-link" target="_blank" rel="noopener noreferrer">                
+                <Envelope size={24} color="blue" />
+                <span> via Mail</span>
+            </a>
+        </div>
+    )
+}
 
 function GenerateFooter() {
     const [showAbout, setShowAbout] = useState(false);
+    const [showContactUs, setContactUs]= useState(false);
     const aboutRef = useRef("");
+    const contactUsRef = useRef("");
 
     useEffect(() => {
         // Scroll to the About section when it's shown
@@ -48,13 +49,30 @@ function GenerateFooter() {
     }, [showAbout]);
 
     const toggleAbout = () => {
+        if(showContactUs){
+            setContactUs(prevShowContactUs=> !prevShowContactUs);
+        }
         setShowAbout(prevShowAbout => !prevShowAbout);
+    };
+
+    useEffect(() => {
+        // Scroll to the About section when it's shown
+        if (showContactUs && contactUsRef.current) {
+            contactUsRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [showContactUs]);
+
+    const toggleContactUs = () => {
+        if(showAbout){
+            setShowAbout(prevShowAbout => !prevShowAbout);
+        }
+        setContactUs(prevShowContactUs => !prevShowContactUs);
     };
 
     return (
         <footer>
             <div className="footer-links">
-                <button className="footer-button" onClick={toggleAbout}>Contact us</button>
+                <button className="footer-button" onClick={toggleContactUs}>Contact us</button>
                 <button className="footer-button" onClick={toggleAbout}>About</button>
                 <a href={ReportABugLink} target="_blank">Report a Bug</a>
             </div>
@@ -62,6 +80,7 @@ function GenerateFooter() {
                 <p>&copy; 2024 Your Website</p>
             </div>
             {showAbout && <About ref={aboutRef} />}
+            {showContactUs && <ContactUs ref={contactUsRef}/>}
         </footer>
     )
 }
