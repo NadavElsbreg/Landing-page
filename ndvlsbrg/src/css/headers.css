@@ -19,6 +19,7 @@ header {
 
 .buttons button {
     margin-left: 10px;
+    margin-right: 10px; 
     padding: 8px 16px;
     background-color: #007bff;
     border: none;
@@ -34,11 +35,14 @@ header {
 
 
 @media (max-width: 768px) {
-    .buttons button:not(:first-child) {
-        display: none;
+    .buttons button {
+        display: block; 
+        margin-left: 0;
+        margin-top: 20px; 
     }
 
     .menu-icon {
         display: flex;
     }
 }
+

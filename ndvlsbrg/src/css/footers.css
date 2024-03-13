@@ -46,6 +46,13 @@ footer {
     margin-left: 40%;
     margin-right: 40%;
 }
+@media only screen and (max-width: 768px) {
+    .footer-about {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
 
 /* WhatsApp link */
 .footer-links .whatsapp-link {
