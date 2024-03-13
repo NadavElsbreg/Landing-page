@@ -6,11 +6,13 @@ import "./headers"
 import headerMainPage from './headers';
 import mainBody from './body';
 import GenerateFooter from './footers'
+import Login from './LogInForm';
 
 function App() { 
     return(
       <div>
         {headerMainPage()}
+        {Login()}
         {mainBody()}
         {GenerateFooter()}
       </div>

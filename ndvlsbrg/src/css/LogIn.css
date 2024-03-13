@@ -1,0 +1,49 @@
+.cookie-manager {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.cookie-manager h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.cookie-manager label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.cookie-manager input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.cookie-manager button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cookie-manager button:hover {
+    background-color: #0056b3;
+}
+
+.cookie-manager h3 {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.cookie-manager p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
