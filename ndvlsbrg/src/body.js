@@ -52,7 +52,7 @@ function MainBody(ipAddress) {
     console.log("we got the ip of: "+ipAddress)
     let ipData = useDataJson(ipAddress);
     // console.log(ipData);
-    if(ipData.status=="success"){
+    if(ipData.status==="success"){
         return(
             <div class="container">
                 <h1>Location Information</h1>
