@@ -1,31 +1,60 @@
-// Login.js
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
-function Login() {
-  const [email, setEmail] = useState('');
+function LoginPage(ipAddress) {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Your login logic here
-    console.log('Login with:', email, password);
-    // Redirect to another page after successful login
-    history.push('/dashboard');
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/login2', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password ,ipAddress}),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        setLoggedInUser(data.name); // Assuming the server returns "name" instead of "user.Name"
+        setError(null);
+      } else {
+        setError(data.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setError('An error occurred. Please try again later.');
+      console.log(error.JSON);
+    }
   };
 
   return (
     <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Login</button>
-      </form>
-      <p>Don't have an account? <a href="/signup">Sign up</a></p>
+      <h2>Login Page</h2>
+      <div>
+        <label>Username:</label>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <button onClick={handleLogin}>Login</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {loggedInUser && <p>Welcome, {loggedInUser}!</p>}
     </div>
   );
 }
 
-export default Login;
+export default LoginPage;

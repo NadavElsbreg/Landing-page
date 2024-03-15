@@ -4,28 +4,6 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 
-function useIPAddress() {
-    const [ipAddress, setIPAddress] = useState('');
-
-    useEffect(() => {
-        const fetchIPAddress = async () => {
-            try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                setIPAddress(data.ip);
-            } catch (error) {
-                console.error('Error fetching IP address:', error);
-                throw new Error('Unable to fetch IP address');
-            }
-        };
-
-        fetchIPAddress();
-    }, []);
-
-    return ipAddress;
-}
-
-
 function useDataJson(ipAddress) {
     const [dataJson, setJson] = useState('');
 
@@ -70,8 +48,8 @@ const MapComponent = ({ latitude, longitude }) => {
 };
 
 
-function MainBody() {
-    const ipAddress = useIPAddress();
+function MainBody(ipAddress) {
+    console.log("we got the ip of: "+ipAddress)
     let ipData = useDataJson(ipAddress);
     // console.log(ipData);
     if(ipData.status=="success"){
