@@ -9,7 +9,7 @@ function LoginPage(ipAddress) {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://84.229.249.59:5000/login2', {
+      const response = await fetch('http://84.229.249.59:5000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ function LoginPage(ipAddress) {
   
       if (response.ok) {
         console.log(data);
-        setLoggedInUser(data.Name); // Assuming the server returns "name" instead of "user.Name"
+        setLoggedInUser(data.Name);
         setError(null);
       } else {
         setError(data.error);
