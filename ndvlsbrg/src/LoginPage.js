@@ -1,3 +1,4 @@
+import './css/LogIn.css';
 import React, { useState } from 'react';
 
 function LoginPage(ipAddress) {
@@ -8,7 +9,7 @@ function LoginPage(ipAddress) {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:5000/login2', {
+      const response = await fetch('http://84.229.249.59:5000/login2', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -19,7 +20,8 @@ function LoginPage(ipAddress) {
       const data = await response.json();
   
       if (response.ok) {
-        setLoggedInUser(data.name); // Assuming the server returns "name" instead of "user.Name"
+        console.log(data);
+        setLoggedInUser(data.Name); // Assuming the server returns "name" instead of "user.Name"
         setError(null);
       } else {
         setError(data.error);
@@ -32,7 +34,7 @@ function LoginPage(ipAddress) {
   };
 
   return (
-    <div>
+    <div class="cookie-manager">
       <h2>Login Page</h2>
       <div>
         <label>Username:</label>

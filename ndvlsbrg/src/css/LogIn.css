@@ -1,10 +1,14 @@
 .cookie-manager {
+    background-color: #777;
     font-family: Arial, sans-serif;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     max-width: 400px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .cookie-manager h2 {
@@ -17,11 +21,14 @@
     margin-bottom: 10px;
 }
 
-.cookie-manager input[type="text"] {
+.cookie-manager input[type="text"],
+.cookie-manager input[type="password"],
+.cookie-manager button {
     width: 100%;
     padding: 8px;
     font-size: 16px;
     margin-bottom: 10px;
+    box-sizing: border-box; /* ensures padding and border are included in width */
 }
 
 .cookie-manager button {
@@ -46,4 +53,5 @@
 .cookie-manager p {
     font-size: 16px;
     margin-bottom: 5px;
+    background-color: #aaa;
 }
