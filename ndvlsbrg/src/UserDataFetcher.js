@@ -1,7 +1,7 @@
 import React, { useEffect ,useState} from 'react';
 
-function IPAddressFetcher(setIPAddress) {
-    const [ipAddress] = useState('');
+function IPAddressFetcher() {
+    const [ipAddress,setIPAddress] = useState('');
 
     useEffect(() => {
         const fetchIPAddress = async () => {

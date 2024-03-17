@@ -49,50 +49,55 @@ const MapComponent = ({ latitude, longitude }) => {
     );
 };
 
-
+//TODO: use useEffect/useState to stop overuse of apis;
+//FIXME: 
 function MainBody(ipAddress) {
-    console.log("we got the ip of: "+ipAddress)
-    let ipData = useDataJson(ipAddress);
-    // console.log(ipData);
-    if(ipData.status==="success"){
-        return(
-            <div class="container">
+    console.log("we got the ip of: " + ipAddress)
+    const ipData = useDataJson(ipAddress);
+    console.log("IpData:", ipData);
+
+    if (!ipData) {
+        return <div>Loading...</div>;
+    }
+
+    if (ipData.status === "success") {
+        return (
+            <div className="container">
                 <h1>Location Information</h1>
-                
-                <div class="location-info">
-                    <div class="info-item">
-                        <span class="info-label">IP Address: </span>
-                        <span class="info-value">{ipAddress}</span>
+                <div className="location-info">
+                    <div className="info-item">
+                        <span className="info-label">IP Address: </span>
+                        <span className="info-value">{ipAddress}</span>
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Country: </span>
-                        <span class="info-value">{ipData.country}</span>
+                    <div className="info-item">
+                        <span className="info-label">Country: </span>
+                        <span className="info-value">{ipData.country}</span>
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">City: </span>
-                        <span class="info-value">{ipData.city}</span>
+                    <div className="info-item">
+                        <span className="info-label">City: </span>
+                        <span className="info-value">{ipData.city}</span>
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Latitude: </span>
-                        <span class="info-value">{ipData.lat}</span>
+                    <div className="info-item">
+                        <span className="info-label">Latitude: </span>
+                        <span className="info-value">{ipData.lat}</span>
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Longitude: </span>
-                        <span class="info-value">{ipData.lon}</span>
-                    </div>            
+                    <div className="info-item">
+                        <span className="info-label">Longitude: </span>
+                        <span className="info-value">{ipData.lon}</span>
+                    </div>
                 </div>
                 <div className='container' id='mapContainer'>
                     <MapComponent latitude={ipData.lat} longitude={ipData.lon}/>
-                </div> 
+                </div>
             </div>
-        )
+        );
     }
 
     return (
         <div>
             <p>Your IP address is: {ipAddress}</p>
         </div>
-    )
+    );
 }
 
 export default MainBody;

@@ -6,6 +6,7 @@ import mainBody from './body';
 import GenerateFooter from './footers'
 import Login from './LoginPage';
 import IPAddressFetcher, { BrowserAgent, BrowserVersion } from './UserDataFetcher';
+import LoginPage from './LoginPage';
 //import { json } from 'body-parser';
 
 
@@ -26,22 +27,14 @@ const PageLoad = async (ipAddress) => {
   }
 }
 
-
-
 // actual app function that builds the entire page 
 function App() {
-  const [ipAddress, setIPAddress] = useState(null);
-
-  useEffect(() => {
-    // Run PageLoad function only once on initial load
-    PageLoad(ipAddress);
-  }, []); // Empty dependency array ensures this effect runs only once
+  var ipAddress = IPAddressFetcher();
 
   return (
     <div>
-      {IPAddressFetcher(setIPAddress)}
       {headerMainPage()}
-      {Login(ipAddress)}
+      <LoginPage ipAddress={ipAddress}/>
       {mainBody(ipAddress)}
       {GenerateFooter()}
     </div>
