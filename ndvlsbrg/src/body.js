@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 
 
 function useDataJson(ipAddress) {
+    console.log("new call for ipaddress data api. ip: "+ipAddress);
     const [dataJson, setJson] = useState('');
 
     useEffect(() => {
@@ -26,6 +27,7 @@ function useDataJson(ipAddress) {
 }
 
 const MapComponent = ({ latitude, longitude }) => {
+    console.log("new call for map api. lat: "+latitude+", lon: "+longitude);
     useEffect(() => {
         const map = L.map('map').setView([latitude, longitude], 13);
 
