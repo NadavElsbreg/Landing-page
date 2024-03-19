@@ -9,6 +9,7 @@
     "cors": "^2.8.5",
     "digital": "^0.0.1",
     "envelope": "^2.1.0",
+    "js-cookie": "^3.0.5",
     "mongodb": "^6.5.0",
     "node": "^21.7.1",
     "nodemon": "^3.1.0",
@@ -44,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
   }
 }

@@ -3,16 +3,16 @@ import './css/App.css';
 import "./headers"
 import headerMainPage from './headers';
 import mainBody from './body';
-import GenerateFooter from './footers'
-import Login from './LoginPage';
+import GenerateFooter from './footers';
 import IPAddressFetcher, { BrowserAgent, BrowserVersion } from './UserDataFetcher';
 import LoginPage from './LoginPage';
+//import Cookies from 'js-coockie';
 //import { json } from 'body-parser';
 
 
 //logs browser version in db
 const PageLoad = async (ipAddress) => {
-  console.log("type of browser car: ", typeof (BrowserVersion));
+  console.log("type of browser: ", typeof (BrowserVersion));
   try {
 
     await fetch('http://84.229.249.59:5000/load', {
@@ -25,10 +25,13 @@ const PageLoad = async (ipAddress) => {
   } catch (error) {
     console.error('Error:', error);
   }
+
+  //return Cookies.get('authToken')
 }
 
 // actual app function that builds the entire page 
 function App() {
+  PageLoad();
   var ipAddress = IPAddressFetcher();
 
   return (
