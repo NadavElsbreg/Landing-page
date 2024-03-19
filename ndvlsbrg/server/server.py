@@ -22,24 +22,27 @@ def generate_random_string(length=16):
     return random_string
 
 def checkAuthExpiretion(user):
-    return datetime.now().date()<user["authKeyExperation"]
+    return datetime.now()<user["authKeyExperation"]
 
 def logLogin(username, ipAddress, status,time, isNotAuthKeyLogIn =True):
-    LogCollection.insert_one({"username":username, "ipAddress":ipAddress, "status":status, "time":time})
+    LogCollection.insert_one({"username":username, "ipAddress":ipAddress, "status":status, "time":time, "isAuthKey": not isNotAuthKeyLogIn})
+    print("logged login")
     if isNotAuthKeyLogIn:
         newAuthKey = generate_random_string()
         query ={"UserName":username}
         updateKey = {"$set": {"AuthKey": newAuthKey}}
-        updateKeyExp = {"$set": {"authKeyExperation": datetime.now().date()+timedelta(days=7)}}  
+        dateExp =  datetime.strptime((datetime.now().date()+timedelta(days=7)).strftime("%Y-%m-%d"), "%Y-%m-%d")
+        updateKeyExp = {"$set": {"authKeyExperation": dateExp}}
+        print(dateExp)
         CredentialCollection.update_one(query,updateKey)
         CredentialCollection.update_one(query,updateKeyExp)
         return newAuthKey
 
 def logLoads(ipAddres, agent, browser):
-    loadsLogCollection.insert_one({"loadFrom":ipAddres, "agent":agent, "browser":browser})
+    loadsLogCollection.insert_one({"loadFrom":ipAddres, "agent":agent, "browser":browser, "time":datetime.now()})
     
 
-def perform_login(username, password, ipAddress, authkey=""):
+def perform_login(username="", password="", ipAddress="", authkey=""):
     current_time = datetime.now()
     print("Current time of login:", current_time)
     if authkey != "":
@@ -59,6 +62,15 @@ def perform_login(username, password, ipAddress, authkey=""):
     else:
         logLogin(username,ipAddress,"No such user",current_time)
         return {"err": "User not found", "time":current_time}
+
+
+@app.route('/auth',methods=['POST'])
+def auth():
+    data = request.json
+    authKey = data.get("authKey")
+    ipAddress = data.get("ipAddress")
+    print('login trial - Auth key:', authKey, 'ip address:', ipAddress)
+    return jsonify(perform_login(ipAddress=ipAddress,authkey=authKey))
 
 
 @app.route('/login', methods=['POST'])
