@@ -1,23 +1,29 @@
 import "./css/headers.css";
 import logo from "./assets/Ndvlogo.svg";
 
+function headerMainPage() {
+  const signOut = () => {
+    document.cookie =
+      "authKey=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    console.log("signed out");
+  };
 
-function headerMainPage(){
-    return(
-        <header>
-            <div class="logo"><img src={logo} className="svg-container" alt="logo" /></div>
-                <div class="buttons">
-                    <button onclick="window.location.href='login.html'">Log in</button>
-                    <button onclick="window.location.href='signup.html'">Sign Up</button>
-                    {/* <button onclick={toggleMenu()}>options</button> */}
-                </div>
-        </header>)
+  return (
+    <header>
+      <div className="logo">
+        <img src={logo} className="svg-container" alt="logo" />
+      </div>
+      <div className="buttons">
+        <button onClick={() => (window.location.href = "login.html")}>
+          Log in
+        </button>
+        <button onClick={() => (window.location.href = "signup.html")}>
+          Sign Up
+        </button>
+        <button onClick={signOut}>Sign out</button>
+      </div>
+    </header>
+  );
 }
 
-function toggleMenu() {
-    console.log("pressed");
-    // var dropdownMenu = document.getElementById('dropdownMenu');
-    // dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
-}
-
-export default headerMainPage
+export default headerMainPage;

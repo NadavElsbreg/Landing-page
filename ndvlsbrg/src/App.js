@@ -9,8 +9,6 @@ import IPAddressFetcher, {
   BrowserVersion,
 } from "./UserDataFetcher";
 import LoginPage, { authenticate, getAuthKey } from "./LoginPage";
-//import Cookies from 'js-coockie';
-//import { json } from 'body-parser';
 
 const authKey = getAuthKey();
 
